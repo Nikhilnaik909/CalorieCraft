@@ -1,0 +1,32 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+food_env/
+.venv/
+venv/
+env/
+
+# Python temporary files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# IDE and system files
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+
+# User-uploaded test images
+static/uploads/*
+!static/uploads/ntn.png
+
+# Automatically downloaded food image cache
+static/food_images/*

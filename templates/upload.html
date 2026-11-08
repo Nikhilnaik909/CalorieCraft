@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="upload-form-container">
+    <h1>Upload Your Food Image</h1>
+    
+    <form action="/upload" method="POST" enctype="multipart/form-data" class="upload-form">
+        <div class="form-group">
+            <label for="image" class="file-label">Select an image of food:</label>
+            <input type="file" name="image" id="image" class="file-input" required onchange="previewImage(event)">
+        </div>
+
+        <button type="submit" class="upload-btn">Upload</button>
+    </form>
+
+    <!-- Image Preview Section -->
+    <div class="image-preview-container" id="imagePreviewContainer" style="display: none;">
+        <h3>Image Preview</h3>
+        <img id="imagePreview" src="" alt="Food Image Preview" class="preview-image">
+        <p id="imageName" class="image-name"></p>
+    </div>
+</div>
+
+<script>
+    function previewImage(event) {
+        const file = event.target.files[0];
+        const previewContainer = document.getElementById("imagePreviewContainer");
+        const imagePreview = document.getElementById("imagePreview");
+        const imageName = document.getElementById("imageName");
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                imagePreview.src = e.target.result;
+                imageName.textContent = "Image: " + file.name;
+            };
+            reader.readAsDataURL(file);
+            previewContainer.style.display = "block"; // Show the preview section
+        }
+    }
+</script>
+
+{% endblock %}

@@ -1,0 +1,95 @@
+
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="upload-results-container">
+
+    <h1>Food Image Recognition Results</h1>
+
+    <!-- Uploaded Image -->
+    {% if image_url %}
+    <div class="uploaded-image">
+        <h2>Uploaded Image</h2>
+
+        <img src="{{ image_url }}"
+             alt="Uploaded Food"
+             class="uploaded-img">
+    </div>
+    {% endif %}
+
+
+    <!-- AI Recognition Details -->
+    {% if detected_food %}
+    <div class="detected-food">
+
+        <h2>AI Food Recognition</h2>
+
+        <p>
+            <strong>Detected Food:</strong>
+            {{ detected_food }}
+        </p>
+
+        {% if confidence is not none %}
+        <p>
+            <strong>AI Confidence:</strong>
+            {{ confidence }}%
+        </p>
+        {% endif %}
+
+    </div>
+    {% endif %}
+
+
+    <!-- Status Message -->
+    {% if message %}
+    <div class="message">
+        <p>{{ message }}</p>
+    </div>
+    {% endif %}
+
+
+    <!-- Nutritional Information -->
+    {% if foods %}
+
+    <div class="matched-foods">
+
+        <h2>Nutritional Information</h2>
+
+        {% for food in foods %}
+
+        <div class="food-item">
+
+            <h3>{{ food['Name'] }}</h3>
+
+            <p>
+                <strong>Calories:</strong>
+                {{ food['Calories'] }} kcal
+            </p>
+
+            <p>
+                <strong>Proteins:</strong>
+                {{ food['Proteins'] }} g
+            </p>
+
+            <p>
+                <strong>Fats:</strong>
+                {{ food['Fats'] }} g
+            </p>
+
+            <p>
+                <strong>Carbohydrates:</strong>
+                {{ food['Carbohydrates'] }} g
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+    {% endif %}
+
+</div>
+
+{% endblock %}
